@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!-- Add to homescreen for Chrome on Android -->
+    <!--<meta name="mobile-web-app-capable" content="yes">-->
+    <!--<meta name="application-name" content="PWAs Demo | Material Design | CodeArtisan">-->
+    <meta name="theme-color" content="#4caf50">
+    <title>PWAs Demo</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Material+Icons' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/textfield.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+<header class="md-header md-header--fixed md-header--primary md-header--casting-shadow md-header--casting-border md-header--has-menu-button">
+    <a class="md-header__menu-button md-button--icon" id="menu-button" href="javascript:;">
+        <i class="material-icons">menu</i>
+    </a>
+    <div class="md-header__row">
+        <div class="md-header__title layout-m-l-3"> PWAs Demo</div>
+        <div class="md-layout-spacer"></div>
+    </div>
+</header>
+
+<main> </main>
+
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="js/textfield.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        console.log("Will the service worker register?");
+        navigator.serviceWorker.register('service-worker.js')
+            .then(function(reg){
+                console.log("Yes, it did.");
+            }).catch(function(err) {
+            console.log("No it didn't. This happened:", err)
+        });
+    }
+</script>
+<script>
+//    function getUrlVars()
+//    {
+//        var vars = [], hash;
+//        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+//        for(var i = 0; i < hashes.length; i++)
+//        {
+//            hash = hashes[i].split('=');
+//            vars.push(hash[0]);
+//            vars[hash[0]] = hash[1];
+//        }
+//        return vars;
+//    }
+//    var target = getUrlVars()["target"];
+//    if(target === 'homeScreen'){
+//        alert('Welcome To PWAs');
+//    }
+    window.addEventListener('beforeinstallprompt', function(e) {
+        // beforeinstallprompt Event fired
+
+        // e.userChoice will return a Promise.
+        // For more details read: https://developers.google.com/web/fundamentals/getting-started/primers/promises
+        e.userChoice.then(function(choiceResult) {
+
+            console.log(choiceResult.outcome);
+
+            if(choiceResult.outcome == 'dismissed') {
+                console.log('User cancelled home screen install');
+            }
+            else {
+                console.log('User added to home screen');
+            }
+        });
+    });
+</script>
+</body>
+</html>

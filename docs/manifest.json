@@ -1,0 +1,15 @@
+{
+  "short_name": "PWAs Intro",
+  "name": "PWAs Introduction",
+  "theme_color": "#4caf50",
+  "background_color": "#4caf50",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "img/1.png",
+      "type": "image/png",
+      "sizes": "240x240"
+    }
+  ],
+  "start_url": "index.html?target=homeScreen"
+}
